@@ -3,7 +3,9 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"math/rand"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -18,7 +20,7 @@ type Book struct {
 
 // Author struct
 type Author struct {
-	FirstName string `json:"firtstname"`
+	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
 }
 
@@ -48,7 +50,12 @@ func getBook(w http.ResponseWriter, r *http.Request) {
 
 // to create a new Book
 func createBook(w http.ResponseWriter, r *http.Request) {
-
+	w.Header().Set("Content-Type", "application/json")
+	var book Book
+	_ = json.NewDecoder(r.Body).Decode(&book)
+	book.ID = strconv.Itoa(rand.Intn(10000000)) // Mock ID - not safe
+	books = append(books, book)
+	json.NewEncoder(w).Encode(book)
 }
 
 // to update Book
