@@ -1,4 +1,4 @@
-package main
+package main // Example of of REST API
 
 import (
 	"encoding/json"
