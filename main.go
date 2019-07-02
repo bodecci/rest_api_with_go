@@ -1,17 +1,24 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
-	"math/rand"
-	"strconv"
+
 	"github.com/gorilla/mux"
 )
 
 // Book Sruct (Model)
-type Book struc {
-	ID		string
+type Book struct {
+	ID     string  `json:"id"`
+	ISBN   string  `json:"isbn"`
+	Title  string  `json:"title"`
+	Author *Author `json:"id"`
+}
+
+// Author struct
+type Author struct {
+	FirstName string `json:"firtstname"`
+	LastName  string `json:"lastname"`
 }
 
 func main() {
